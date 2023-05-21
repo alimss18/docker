@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+ wordpress:
+    image: wordpress_169_alimhan:latest
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: mdpwp
+      WORDPRESS_DB_NAME: wordpressdb
+    volumes:
+      - wordpress:/var/www/html
+ db:
+  image: db_169_alimhan:latest
+  restart: always
+  environment:
+   MYSQL_DATABASE: wordpressdb
+   MYSQL_USER: wpuser
+   MYSQL_PASSWORD: mdpwp
+   MYSQL_ROOT_PASSWORD: mdp
+  volumes:
+    - ./dbdata/:/var/lib/mysql
+volumes:
+  wordpress:
+  db:
